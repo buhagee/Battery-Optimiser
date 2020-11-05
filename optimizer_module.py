@@ -2,7 +2,7 @@
 
 import gurobipy as gp
 from gurobipy import GRB
-#import pandas as pd
+from math import floor
 
 # Useful Variable Definitions
 
@@ -23,16 +23,13 @@ bStorage = 2
 roundTripEfficiency = 0.81
 
 
-def optimize(prices, bstorage0): 
+def optimize(prices, bStorage0): 
 
 	# Input Paramters 
 
-	# bstorage0 -> Starting battery charge (MWh)
-	#bStorage0 = 0
+	# bstorage0 -> Integer of starting battery charge (MWh)
 
-	# prices -> Price predictions for energy ($/MWh)
-	#df = pd.read_csv('prices.csv')
-	#prices = df['Prices'].values.tolist()
+	# prices -> List of price predictions for energy ($/MWh)
 
 	try:
 	    # Create a new model
@@ -76,6 +73,7 @@ def optimize(prices, bstorage0):
 	    preserveEnergyInStorage = m.addConstr(energyInStorage[len(prices)] == (energyInStorage[len(prices)-1]) - (roundTripEfficiency*chargeBattery[len(prices)-1]/12) - (dischargeBattery[len(prices)-1]/12))
 
 	    # Optimize model
+        m.setParam( 'OutputFlag', False ) # Suppresses Gurobi output
 	    m.optimize()
 
 	    
@@ -149,7 +147,7 @@ def optimize(prices, bstorage0):
 		'''
 
 	    # nxtAction = Optimal solution for next battery action (MWh)
-	    # CHARGE < 0, DISCHARGE > 0, DO NOTHING = 0
+	    # CHARGE if < 0, DISCHARGE if > 0, DO NOTHING if = 0
 	    # nxtBatCharge = Bat charge next time interval if nxtAction is used and battery efficiency accounted for
 
 	    return nxtAction, nxtBatCharge
