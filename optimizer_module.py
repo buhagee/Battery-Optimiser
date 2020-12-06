@@ -80,6 +80,7 @@ def optimize(prices, bStorage0, outputStats=0, outputActions=0, outputCharge=0):
         # Stats + Debugging
 
         profit = 0
+        revenue = 0
         cost = 0
         charges = 0
         chargeMW = 0
@@ -106,6 +107,7 @@ def optimize(prices, bStorage0, outputStats=0, outputActions=0, outputCharge=0):
                         nxtAction = v.x
                     currAction = "DISCHARGE"
                     profit += v.x * prices[floor(i / numDecisionVars)] / hrIntervals
+                    revenue += v.x * prices[floor(i / numDecisionVars)] / hrIntervals
                     discharges += 1
                     dischargeMW += v.x / 12
                 elif (v.x < 0):
@@ -136,23 +138,16 @@ def optimize(prices, bStorage0, outputStats=0, outputActions=0, outputCharge=0):
         # OPTIMAL SOLUTION STATS
 
         if (outputStats == 1):
-            print('\nModel objective value: %.4g' % m.objVal)
-            print("Predicted profit = $%.4g -> %.2g%% Profit" % (profit, 100 * profit / cost))
-            print("Charged %.4g MW over %d charge intervals (Lost %.4g MW due to battery inefficiency)" % (
+            print('\nModel objective value: %.2f' % m.objVal)
+            print("Predicted profit = $%.2f -> %.2f%% Profit" % (profit, 100 * profit / cost))
+            print("Charged %.2f MW over %d charge intervals (Lost %.2f MW due to battery inefficiency)" % (
             chargeMW, charges, chargeMW - (roundTripEfficiency * chargeMW)))
-            print("Discharged %.4g MW over %s discharge intervals" % (dischargeMW, discharges))
+            print("Total Cost $%.2f" % (cost))
+            print("Discharged %.2f MW over %s discharge intervals" % (dischargeMW, discharges))
+            print("Total Revenue $%.2f" % (revenue))
             print("Did nothing during %d time intervals" % (waiting))
-            print("Min price: $%.4g, Max price: $%.4g" % (min(prices), max(prices)))
+            print("Min price: $%.2f, Max price: $%.2f" % (min(prices), max(prices)))
 
-            '''
-            if (nxtAction < 0):
-                print("\nBattery action this time interval: CHARGE %g MWh" % (-nxtAction/12))
-            elif (nxtAction > 0):
-                print("\nBattery action this time interval: DISCHARGE %g MWh" % (nxtAction/12))
-            else:
-                print("\nBattery action this time interval: DO NOTHING")
-            print("Battery charge next time interval: %.5g MW" % (nxtBatCharge))
-            '''
 
         # nxtAction = Optimal solution for next battery action (MWh)
         # CHARGE if < 0, DISCHARGE if > 0, DO NOTHING if = 0
