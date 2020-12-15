@@ -1,0 +1,17 @@
+# Battery-Optimiser
+
+This repository contains the final code and results for my capstone uni course 
+
+Abstract
+
+The Australian Energy Market Commission (AEMC) has recently implemented
+the use of new battery storage systems as a contribution to the movement towards renewable energy. Having a relationship between batteries and other sources
+of renewable energy generation, predominantly solar and wind, allows energy to
+be discharged at times of peak high demand and stored during times of low demand. Predictions of energy demand and energy market prices are needed to
+maximise the profits of using such a system. Profits are defined as the revenue
+obtained from discharging energy in moments of high energy demand and the
+costs of charging the battery when there is low demand. The aim of this report
+is to produce a forecasting model that generates accurate predictions of energy
+prices in the South Australian region which can then be linearly optimised to
+maximise the profit of a battery over a 6-month period. The results of the optimisation model are promising as 44.54% of the maximum attainable profit available
+in the market was achieved by the model.
