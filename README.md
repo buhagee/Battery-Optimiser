@@ -1,6 +1,6 @@
 # Battery-Optimiser
 
-This repository contains the final code and results for my capstone uni course 
+This repository contains the final code and results for my group capstone uni course 
 
 Abstract
 
