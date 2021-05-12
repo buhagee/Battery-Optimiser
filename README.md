@@ -1,6 +1,6 @@
 # Battery-Optimiser
 
-This repository contains the final code and results for my group capstone uni course. I specifically worked on the optimizer_module.py, the cleaning_test_data.py, the testing environment including generate_results_data.py and combined the testing environment, my optimizer and my teams machine learning algorithm to generate the raw results which can be found in the FINAL_RESULTS_DATA and visualised important results which can be seen in the png files. I have also uploaded the final report that we were graded on, receiving an overall HD grade.
+This repository contains the final code and results for my group capstone uni course. I specifically designed the battery optimizer and programmed the optimizer_module.py, the cleaning_test_data.py, the testing environment including generate_results_data.py and combined the testing environment, my optimizer and my teams machine learning algorithm to generate the raw results which can be found in the FINAL_RESULTS_DATA. I then visualised important results which can be seen in the png files. I have also uploaded the final report that my team wrote which we were graded on, receiving an overall HD grade.
 
 Abstract
 
